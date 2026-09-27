@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <script src="practical 13.js"></script> -->
+</head>
+<body>
+    <h2>student data</h2>
+    <button onclick="fetchdata()">fetch data</button>
+    <div id ="output"></div>
+    <script>
+        async function fetchdata(){
+            const response = await fetch("http://localhost:3000/api/student");
+            const data = await response.json();
+
+            const output=document.getElementById("output");
+            const table = document.createElement("table");
+            table.border="1";
+            const header=table.insertRow();
+            header.insertCell().textContent="name";
+            header.insertCell().textContent="id";
+            header.insertCell().textContent="branch";
+
+
+            data.forEach((d)=>{
+                const row = table.insertRow();
+                row.insertCell().textContent=d.name;
+                row.insertCell().textContent=d.id;
+                row.insertCell().textContent=d.batch;         
+            });
+            output.appendChild(table);
+        }
+        
+    </script>
+</body>
+</html>
